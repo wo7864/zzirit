@@ -30,12 +30,6 @@ export interface OrderItemRequestDto {
      * @type {number}
      * @memberof OrderItemRequestDto
      */
-    timeDealItemId?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof OrderItemRequestDto
-     */
     quantity?: number;
     /**
      * 
@@ -69,7 +63,6 @@ export function OrderItemRequestDtoFromJSONTyped(json: any, ignoreDiscriminator:
     return {
         
         'itemId': json['itemId'] == null ? undefined : json['itemId'],
-        'timeDealItemId': json['timeDealItemId'] == null ? undefined : json['timeDealItemId'],
         'quantity': json['quantity'] == null ? undefined : json['quantity'],
         'itemName': json['itemName'] == null ? undefined : json['itemName'],
         'price': json['price'] == null ? undefined : json['price'],
@@ -88,7 +81,6 @@ export function OrderItemRequestDtoToJSONTyped(value?: OrderItemRequestDto | nul
     return {
         
         'itemId': value['itemId'],
-        'timeDealItemId': value['timeDealItemId'],
         'quantity': value['quantity'],
         'itemName': value['itemName'],
         'price': value['price'],

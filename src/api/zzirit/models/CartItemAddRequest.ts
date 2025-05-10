@@ -30,13 +30,7 @@ export interface CartItemAddRequest {
      * @type {number}
      * @memberof CartItemAddRequest
      */
-    quantity?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CartItemAddRequest
-     */
-    timeDeal?: boolean;
+    quantity: number;
 }
 
 /**
@@ -44,6 +38,7 @@ export interface CartItemAddRequest {
  */
 export function instanceOfCartItemAddRequest(value: object): value is CartItemAddRequest {
     if (!('itemId' in value) || value['itemId'] === undefined) return false;
+    if (!('quantity' in value) || value['quantity'] === undefined) return false;
     return true;
 }
 
@@ -58,8 +53,7 @@ export function CartItemAddRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'itemId': json['itemId'],
-        'quantity': json['quantity'] == null ? undefined : json['quantity'],
-        'timeDeal': json['timeDeal'] == null ? undefined : json['timeDeal'],
+        'quantity': json['quantity'],
     };
 }
 
@@ -76,7 +70,6 @@ export function CartItemAddRequestToJSONTyped(value?: CartItemAddRequest | null,
         
         'itemId': value['itemId'],
         'quantity': value['quantity'],
-        'timeDeal': value['timeDeal'],
     };
 }
 

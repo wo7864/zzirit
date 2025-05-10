@@ -22,43 +22,43 @@ import {
 } from './TimeDealCreateItem';
 
 /**
- * 타임딜 등록 응답
+ * 
  * @export
  * @interface TimeDealCreateResponse
  */
 export interface TimeDealCreateResponse {
     /**
-     * 타임딜 ID
+     * 
      * @type {number}
      * @memberof TimeDealCreateResponse
      */
     timeDealId?: number;
     /**
-     * 타임딜 제목
+     * 
      * @type {string}
      * @memberof TimeDealCreateResponse
      */
-    title?: string;
+    timeDealName?: string;
     /**
-     * 시작 시간
+     * 
      * @type {string}
      * @memberof TimeDealCreateResponse
      */
     startTime?: string;
     /**
-     * 종료 시간
+     * 
      * @type {string}
      * @memberof TimeDealCreateResponse
      */
     endTime?: string;
     /**
-     * 할인율 (%)
+     * 
      * @type {number}
      * @memberof TimeDealCreateResponse
      */
-    discountRate?: number;
+    discountRatio?: number;
     /**
-     * 타임딜 대상 상품 목록
+     * 
      * @type {Array<TimeDealCreateItem>}
      * @memberof TimeDealCreateResponse
      */
@@ -83,10 +83,10 @@ export function TimeDealCreateResponseFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'timeDealId': json['timeDealId'] == null ? undefined : json['timeDealId'],
-        'title': json['title'] == null ? undefined : json['title'],
+        'timeDealName': json['timeDealName'] == null ? undefined : json['timeDealName'],
         'startTime': json['startTime'] == null ? undefined : json['startTime'],
         'endTime': json['endTime'] == null ? undefined : json['endTime'],
-        'discountRate': json['discountRate'] == null ? undefined : json['discountRate'],
+        'discountRatio': json['discountRatio'] == null ? undefined : json['discountRatio'],
         'items': json['items'] == null ? undefined : ((json['items'] as Array<any>).map(TimeDealCreateItemFromJSON)),
     };
 }
@@ -103,10 +103,10 @@ export function TimeDealCreateResponseToJSONTyped(value?: TimeDealCreateResponse
     return {
         
         'timeDealId': value['timeDealId'],
-        'title': value['title'],
+        'timeDealName': value['timeDealName'],
         'startTime': value['startTime'],
         'endTime': value['endTime'],
-        'discountRate': value['discountRate'],
+        'discountRatio': value['discountRatio'],
         'items': value['items'] == null ? undefined : ((value['items'] as Array<any>).map(TimeDealCreateItemToJSON)),
     };
 }

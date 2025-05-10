@@ -24,7 +24,7 @@ export interface ItemCreateRequest {
      * @type {string}
      * @memberof ItemCreateRequest
      */
-    name?: string;
+    name: string;
     /**
      * 
      * @type {number}
@@ -42,19 +42,29 @@ export interface ItemCreateRequest {
      * @type {number}
      * @memberof ItemCreateRequest
      */
-    typeId?: number;
+    typeId: number;
     /**
      * 
      * @type {number}
      * @memberof ItemCreateRequest
      */
-    brandId?: number;
+    brandId: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ItemCreateRequest
+     */
+    imageUrl: string;
 }
 
 /**
  * Check if a given object implements the ItemCreateRequest interface.
  */
 export function instanceOfItemCreateRequest(value: object): value is ItemCreateRequest {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('typeId' in value) || value['typeId'] === undefined) return false;
+    if (!('brandId' in value) || value['brandId'] === undefined) return false;
+    if (!('imageUrl' in value) || value['imageUrl'] === undefined) return false;
     return true;
 }
 
@@ -68,11 +78,12 @@ export function ItemCreateRequestFromJSONTyped(json: any, ignoreDiscriminator: b
     }
     return {
         
-        'name': json['name'] == null ? undefined : json['name'],
+        'name': json['name'],
         'stockQuantity': json['stockQuantity'] == null ? undefined : json['stockQuantity'],
         'price': json['price'] == null ? undefined : json['price'],
-        'typeId': json['typeId'] == null ? undefined : json['typeId'],
-        'brandId': json['brandId'] == null ? undefined : json['brandId'],
+        'typeId': json['typeId'],
+        'brandId': json['brandId'],
+        'imageUrl': json['imageUrl'],
     };
 }
 
@@ -92,6 +103,7 @@ export function ItemCreateRequestToJSONTyped(value?: ItemCreateRequest | null, i
         'price': value['price'],
         'typeId': value['typeId'],
         'brandId': value['brandId'],
+        'imageUrl': value['imageUrl'],
     };
 }
 

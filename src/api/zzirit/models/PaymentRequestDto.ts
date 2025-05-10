@@ -44,13 +44,19 @@ export interface PaymentRequestDto {
      * @type {string}
      * @memberof PaymentRequestDto
      */
-    shippingAddress?: string;
+    shippingRequest?: string;
     /**
      * 
      * @type {string}
      * @memberof PaymentRequestDto
      */
-    shippingAddressDetail?: string;
+    address?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaymentRequestDto
+     */
+    addressDetail?: string;
 }
 
 /**
@@ -72,8 +78,9 @@ export function PaymentRequestDtoFromJSONTyped(json: any, ignoreDiscriminator: b
         
         'orderItems': json['orderItems'] == null ? undefined : ((json['orderItems'] as Array<any>).map(OrderItemRequestDtoFromJSON)),
         'totalAmount': json['totalAmount'] == null ? undefined : json['totalAmount'],
-        'shippingAddress': json['shippingAddress'] == null ? undefined : json['shippingAddress'],
-        'shippingAddressDetail': json['shippingAddressDetail'] == null ? undefined : json['shippingAddressDetail'],
+        'shippingRequest': json['shippingRequest'] == null ? undefined : json['shippingRequest'],
+        'address': json['address'] == null ? undefined : json['address'],
+        'addressDetail': json['addressDetail'] == null ? undefined : json['addressDetail'],
     };
 }
 
@@ -90,8 +97,9 @@ export function PaymentRequestDtoToJSONTyped(value?: PaymentRequestDto | null, i
         
         'orderItems': value['orderItems'] == null ? undefined : ((value['orderItems'] as Array<any>).map(OrderItemRequestDtoToJSON)),
         'totalAmount': value['totalAmount'],
-        'shippingAddress': value['shippingAddress'],
-        'shippingAddressDetail': value['shippingAddressDetail'],
+        'shippingRequest': value['shippingRequest'],
+        'address': value['address'],
+        'addressDetail': value['addressDetail'],
     };
 }
 

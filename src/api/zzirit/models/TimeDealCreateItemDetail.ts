@@ -16,35 +16,35 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface TimeDealCreateItem
+ * @interface TimeDealCreateItemDetail
  */
-export interface TimeDealCreateItem {
+export interface TimeDealCreateItemDetail {
     /**
      * 
      * @type {number}
-     * @memberof TimeDealCreateItem
+     * @memberof TimeDealCreateItemDetail
      */
     itemId?: number;
     /**
      * 
      * @type {number}
-     * @memberof TimeDealCreateItem
+     * @memberof TimeDealCreateItemDetail
      */
     quantity?: number;
 }
 
 /**
- * Check if a given object implements the TimeDealCreateItem interface.
+ * Check if a given object implements the TimeDealCreateItemDetail interface.
  */
-export function instanceOfTimeDealCreateItem(value: object): value is TimeDealCreateItem {
+export function instanceOfTimeDealCreateItemDetail(value: object): value is TimeDealCreateItemDetail {
     return true;
 }
 
-export function TimeDealCreateItemFromJSON(json: any): TimeDealCreateItem {
-    return TimeDealCreateItemFromJSONTyped(json, false);
+export function TimeDealCreateItemDetailFromJSON(json: any): TimeDealCreateItemDetail {
+    return TimeDealCreateItemDetailFromJSONTyped(json, false);
 }
 
-export function TimeDealCreateItemFromJSONTyped(json: any, ignoreDiscriminator: boolean): TimeDealCreateItem {
+export function TimeDealCreateItemDetailFromJSONTyped(json: any, ignoreDiscriminator: boolean): TimeDealCreateItemDetail {
     if (json == null) {
         return json;
     }
@@ -55,11 +55,11 @@ export function TimeDealCreateItemFromJSONTyped(json: any, ignoreDiscriminator: 
     };
 }
 
-export function TimeDealCreateItemToJSON(json: any): TimeDealCreateItem {
-    return TimeDealCreateItemToJSONTyped(json, false);
+export function TimeDealCreateItemDetailToJSON(json: any): TimeDealCreateItemDetail {
+    return TimeDealCreateItemDetailToJSONTyped(json, false);
 }
 
-export function TimeDealCreateItemToJSONTyped(value?: TimeDealCreateItem | null, ignoreDiscriminator: boolean = false): any {
+export function TimeDealCreateItemDetailToJSONTyped(value?: TimeDealCreateItemDetail | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }

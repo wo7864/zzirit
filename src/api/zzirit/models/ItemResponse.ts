@@ -51,16 +51,34 @@ export interface ItemResponse {
     quantity?: number;
     /**
      * 
+     * @type {string}
+     * @memberof ItemResponse
+     */
+    imageUrl?: string;
+    /**
+     * 
      * @type {number}
      * @memberof ItemResponse
      */
-    price?: number;
+    originalPrice?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ItemResponse
+     */
+    discountedPrice?: number;
     /**
      * 
      * @type {string}
      * @memberof ItemResponse
      */
     timeDealStatus?: ItemResponseTimeDealStatusEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof ItemResponse
+     */
+    discountRatio?: number;
     /**
      * 
      * @type {Date}
@@ -102,8 +120,11 @@ export function ItemResponseFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'type': json['type'] == null ? undefined : json['type'],
         'brand': json['brand'] == null ? undefined : json['brand'],
         'quantity': json['quantity'] == null ? undefined : json['quantity'],
-        'price': json['price'] == null ? undefined : json['price'],
+        'imageUrl': json['imageUrl'] == null ? undefined : json['imageUrl'],
+        'originalPrice': json['originalPrice'] == null ? undefined : json['originalPrice'],
+        'discountedPrice': json['discountedPrice'] == null ? undefined : json['discountedPrice'],
         'timeDealStatus': json['timeDealStatus'] == null ? undefined : json['timeDealStatus'],
+        'discountRatio': json['discountRatio'] == null ? undefined : json['discountRatio'],
         'endTimeDeal': json['endTimeDeal'] == null ? undefined : (new Date(json['endTimeDeal'])),
     };
 }
@@ -124,8 +145,11 @@ export function ItemResponseToJSONTyped(value?: ItemResponse | null, ignoreDiscr
         'type': value['type'],
         'brand': value['brand'],
         'quantity': value['quantity'],
-        'price': value['price'],
+        'imageUrl': value['imageUrl'],
+        'originalPrice': value['originalPrice'],
+        'discountedPrice': value['discountedPrice'],
         'timeDealStatus': value['timeDealStatus'],
+        'discountRatio': value['discountRatio'],
         'endTimeDeal': value['endTimeDeal'] == null ? undefined : ((value['endTimeDeal']).toISOString()),
     };
 }

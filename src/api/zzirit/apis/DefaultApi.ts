@@ -16,21 +16,24 @@
 import * as runtime from '../runtime';
 import type {
   BaseResponseEmpty,
-  BaseResponseMember,
+  BaseResponseMyPageInfoDTO,
   EmailAuthDTO,
   EmailAuthVerificationDTO,
+  MyPageAddressUpdateDTO,
   SignupDTO,
   SocialSignupDTO,
 } from '../models/index';
 import {
     BaseResponseEmptyFromJSON,
     BaseResponseEmptyToJSON,
-    BaseResponseMemberFromJSON,
-    BaseResponseMemberToJSON,
+    BaseResponseMyPageInfoDTOFromJSON,
+    BaseResponseMyPageInfoDTOToJSON,
     EmailAuthDTOFromJSON,
     EmailAuthDTOToJSON,
     EmailAuthVerificationDTOFromJSON,
     EmailAuthVerificationDTOToJSON,
+    MyPageAddressUpdateDTOFromJSON,
+    MyPageAddressUpdateDTOToJSON,
     SignupDTOFromJSON,
     SignupDTOToJSON,
     SocialSignupDTOFromJSON,
@@ -49,6 +52,10 @@ export interface SignupRequest {
     signupDTO: SignupDTO;
 }
 
+export interface UpdateAddressRequest {
+    myPageAddressUpdateDTO: MyPageAddressUpdateDTO;
+}
+
 export interface VerifyEmailCodeRequest {
     emailAuthVerificationDTO: EmailAuthVerificationDTO;
 }
@@ -61,7 +68,7 @@ export class DefaultApi extends runtime.BaseAPI {
     /**
      * 로그인 인증 상태 확인
      */
-    async checkAuthRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BaseResponseMember>> {
+    async checkAuthRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BaseResponseEmpty>> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -81,19 +88,19 @@ export class DefaultApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => BaseResponseMemberFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => BaseResponseEmptyFromJSON(jsonValue));
     }
 
     /**
      * 로그인 인증 상태 확인
      */
-    async checkAuth(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BaseResponseMember> {
+    async checkAuth(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BaseResponseEmpty> {
         const response = await this.checkAuthRaw(initOverrides);
         return await response.value();
     }
 
     /**
-     * 임시 회원가입 토큰 검증
+     * 임시 회원가입 토큰 유효성 검증
      */
     async checkTempTokenRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BaseResponseEmpty>> {
         const queryParameters: any = {};
@@ -119,7 +126,7 @@ export class DefaultApi extends runtime.BaseAPI {
     }
 
     /**
-     * 임시 회원가입 토큰 검증
+     * 임시 회원가입 토큰 유효성 검증
      */
     async checkTempToken(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BaseResponseEmpty> {
         const response = await this.checkTempTokenRaw(initOverrides);
@@ -167,6 +174,42 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async completeSignup(requestParameters: CompleteSignupRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BaseResponseEmpty> {
         const response = await this.completeSignupRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * 회원의 이름 및 주소 정보를 조회합니다.
+     * 내 정보 조회
+     */
+    async getMyPageInfoRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BaseResponseMyPageInfoDTO>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("bearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/user/mypage/info`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BaseResponseMyPageInfoDTOFromJSON(jsonValue));
+    }
+
+    /**
+     * 회원의 이름 및 주소 정보를 조회합니다.
+     * 내 정보 조회
+     */
+    async getMyPageInfo(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BaseResponseMyPageInfoDTO> {
+        const response = await this.getMyPageInfoRaw(initOverrides);
         return await response.value();
     }
 
@@ -255,6 +298,52 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async signup(requestParameters: SignupRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BaseResponseEmpty> {
         const response = await this.signupRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * 회원의 주소 및 상세주소를 수정합니다.
+     * 주소 수정
+     */
+    async updateAddressRaw(requestParameters: UpdateAddressRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<BaseResponseEmpty>> {
+        if (requestParameters['myPageAddressUpdateDTO'] == null) {
+            throw new runtime.RequiredError(
+                'myPageAddressUpdateDTO',
+                'Required parameter "myPageAddressUpdateDTO" was null or undefined when calling updateAddress().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            const token = this.configuration.accessToken;
+            const tokenString = await token("bearer", []);
+
+            if (tokenString) {
+                headerParameters["Authorization"] = `Bearer ${tokenString}`;
+            }
+        }
+        const response = await this.request({
+            path: `/api/user/mypage/address`,
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: MyPageAddressUpdateDTOToJSON(requestParameters['myPageAddressUpdateDTO']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => BaseResponseEmptyFromJSON(jsonValue));
+    }
+
+    /**
+     * 회원의 주소 및 상세주소를 수정합니다.
+     * 주소 수정
+     */
+    async updateAddress(requestParameters: UpdateAddressRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<BaseResponseEmpty> {
+        const response = await this.updateAddressRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { client } from "@/api/zzirit/client";
 
 const signUpSchema = z
   .object({
@@ -89,6 +90,11 @@ export default function SignUp() {
   // 인증번호 발송 함수 (가짜)
   const handleSendCode = () => {
     // 실제로는 이메일로 인증번호 발송 API 호출
+    client.auth.sendEmailVerificationCode({
+      emailAuthDTO: {
+        email: "test@test.com",
+      },
+    });
     const code = Math.floor(100000 + Math.random() * 900000).toString();
     setVerificationCode(code);
     setIsEmailSent(true);

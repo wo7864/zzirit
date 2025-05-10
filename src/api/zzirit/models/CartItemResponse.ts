@@ -14,55 +14,73 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ * 장바구니 상품 응답 DTO
  * @export
  * @interface CartItemResponse
  */
 export interface CartItemResponse {
     /**
-     * 
+     * 장바구니 아이템 ID
      * @type {number}
      * @memberof CartItemResponse
      */
     cartItemId?: number;
     /**
-     * 
+     * 상품 ID
      * @type {number}
      * @memberof CartItemResponse
      */
     itemId?: number;
     /**
-     * 
+     * 상품명
      * @type {string}
      * @memberof CartItemResponse
      */
     itemName?: string;
     /**
-     * 
+     * 상품 종류
      * @type {string}
      * @memberof CartItemResponse
      */
-    itemImageUrl?: string;
+    type?: string;
     /**
-     * 
+     * 브랜드명
+     * @type {string}
+     * @memberof CartItemResponse
+     */
+    brand?: string;
+    /**
+     * 수량
      * @type {number}
      * @memberof CartItemResponse
      */
     quantity?: number;
     /**
-     * 
+     * 상품 이미지 URL
+     * @type {string}
+     * @memberof CartItemResponse
+     */
+    imageUrl?: string;
+    /**
+     * 상품 정가
      * @type {number}
      * @memberof CartItemResponse
      */
-    unitPrice?: number;
+    originalPrice?: number;
     /**
-     * 
+     * 할인 적용된 가격
+     * @type {number}
+     * @memberof CartItemResponse
+     */
+    discountedPrice?: number;
+    /**
+     * 총 가격 (수량 * 할인 가격)
      * @type {number}
      * @memberof CartItemResponse
      */
     totalPrice?: number;
     /**
-     * 
+     * 할인율
      * @type {number}
      * @memberof CartItemResponse
      */
@@ -73,6 +91,12 @@ export interface CartItemResponse {
      * @memberof CartItemResponse
      */
     timeDeal?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CartItemResponse
+     */
+    soldOut?: boolean;
 }
 
 /**
@@ -95,12 +119,16 @@ export function CartItemResponseFromJSONTyped(json: any, ignoreDiscriminator: bo
         'cartItemId': json['cartItemId'] == null ? undefined : json['cartItemId'],
         'itemId': json['itemId'] == null ? undefined : json['itemId'],
         'itemName': json['itemName'] == null ? undefined : json['itemName'],
-        'itemImageUrl': json['itemImageUrl'] == null ? undefined : json['itemImageUrl'],
+        'type': json['type'] == null ? undefined : json['type'],
+        'brand': json['brand'] == null ? undefined : json['brand'],
         'quantity': json['quantity'] == null ? undefined : json['quantity'],
-        'unitPrice': json['unitPrice'] == null ? undefined : json['unitPrice'],
+        'imageUrl': json['imageUrl'] == null ? undefined : json['imageUrl'],
+        'originalPrice': json['originalPrice'] == null ? undefined : json['originalPrice'],
+        'discountedPrice': json['discountedPrice'] == null ? undefined : json['discountedPrice'],
         'totalPrice': json['totalPrice'] == null ? undefined : json['totalPrice'],
         'discountRatio': json['discountRatio'] == null ? undefined : json['discountRatio'],
         'timeDeal': json['timeDeal'] == null ? undefined : json['timeDeal'],
+        'soldOut': json['soldOut'] == null ? undefined : json['soldOut'],
     };
 }
 
@@ -118,12 +146,16 @@ export function CartItemResponseToJSONTyped(value?: CartItemResponse | null, ign
         'cartItemId': value['cartItemId'],
         'itemId': value['itemId'],
         'itemName': value['itemName'],
-        'itemImageUrl': value['itemImageUrl'],
+        'type': value['type'],
+        'brand': value['brand'],
         'quantity': value['quantity'],
-        'unitPrice': value['unitPrice'],
+        'imageUrl': value['imageUrl'],
+        'originalPrice': value['originalPrice'],
+        'discountedPrice': value['discountedPrice'],
         'totalPrice': value['totalPrice'],
         'discountRatio': value['discountRatio'],
         'timeDeal': value['timeDeal'],
+        'soldOut': value['soldOut'],
     };
 }
 

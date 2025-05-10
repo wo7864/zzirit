@@ -1,12 +1,21 @@
+import { DefaultApi, PaymentsApi } from "./apis";
 import { APIApi } from "./apis/APIApi";
-import { MockApi } from "./apis/MockApi";
 import { Configuration } from "./runtime";
 
 const config = new Configuration({
   // 필요시 basePath, accessToken 등 환경변수로 전달
 });
 
-const apiMode = process.env.NEXT_PUBLIC_API_MODE;
+class Client {
+  auth: DefaultApi;
+  api: APIApi;
+  payments: PaymentsApi;
 
-export const client =
-  apiMode === "mock" ? new MockApi(config) : new APIApi(config);
+  constructor(config: Configuration) {
+    this.auth = new DefaultApi(config);
+    this.api = new APIApi(config);
+    this.payments = new PaymentsApi(config);
+  }
+}
+
+export const client = new Client(config);

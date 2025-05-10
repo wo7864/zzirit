@@ -45,16 +45,40 @@ export interface SimpleItemResponse {
     brand?: string;
     /**
      * 
+     * @type {string}
+     * @memberof SimpleItemResponse
+     */
+    imageUrl?: string;
+    /**
+     * 
      * @type {number}
      * @memberof SimpleItemResponse
      */
-    price?: number;
+    originalPrice?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SimpleItemResponse
+     */
+    discountedPrice?: number;
     /**
      * 
      * @type {string}
      * @memberof SimpleItemResponse
      */
     timeDealStatus?: SimpleItemResponseTimeDealStatusEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof SimpleItemResponse
+     */
+    discountRatio?: number;
+    /**
+     * 
+     * @type {Date}
+     * @memberof SimpleItemResponse
+     */
+    endTime?: Date;
 }
 
 
@@ -89,8 +113,12 @@ export function SimpleItemResponseFromJSONTyped(json: any, ignoreDiscriminator: 
         'name': json['name'] == null ? undefined : json['name'],
         'type': json['type'] == null ? undefined : json['type'],
         'brand': json['brand'] == null ? undefined : json['brand'],
-        'price': json['price'] == null ? undefined : json['price'],
+        'imageUrl': json['imageUrl'] == null ? undefined : json['imageUrl'],
+        'originalPrice': json['originalPrice'] == null ? undefined : json['originalPrice'],
+        'discountedPrice': json['discountedPrice'] == null ? undefined : json['discountedPrice'],
         'timeDealStatus': json['timeDealStatus'] == null ? undefined : json['timeDealStatus'],
+        'discountRatio': json['discountRatio'] == null ? undefined : json['discountRatio'],
+        'endTime': json['endTime'] == null ? undefined : (new Date(json['endTime'])),
     };
 }
 
@@ -109,8 +137,12 @@ export function SimpleItemResponseToJSONTyped(value?: SimpleItemResponse | null,
         'name': value['name'],
         'type': value['type'],
         'brand': value['brand'],
-        'price': value['price'],
+        'imageUrl': value['imageUrl'],
+        'originalPrice': value['originalPrice'],
+        'discountedPrice': value['discountedPrice'],
         'timeDealStatus': value['timeDealStatus'],
+        'discountRatio': value['discountRatio'],
+        'endTime': value['endTime'] == null ? undefined : ((value['endTime']).toISOString()),
     };
 }
 

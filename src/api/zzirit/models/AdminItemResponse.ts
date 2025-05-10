@@ -39,12 +39,6 @@ export interface AdminItemResponse {
     imageUrl?: string;
     /**
      * 
-     * @type {number}
-     * @memberof AdminItemResponse
-     */
-    stockQuantity?: number;
-    /**
-     * 
      * @type {string}
      * @memberof AdminItemResponse
      */
@@ -61,6 +55,18 @@ export interface AdminItemResponse {
      * @memberof AdminItemResponse
      */
     price?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdminItemResponse
+     */
+    initialStockQuantity?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AdminItemResponse
+     */
+    soldStockQuantity?: number;
 }
 
 /**
@@ -83,10 +89,11 @@ export function AdminItemResponseFromJSONTyped(json: any, ignoreDiscriminator: b
         'id': json['id'] == null ? undefined : json['id'],
         'name': json['name'] == null ? undefined : json['name'],
         'imageUrl': json['imageUrl'] == null ? undefined : json['imageUrl'],
-        'stockQuantity': json['stockQuantity'] == null ? undefined : json['stockQuantity'],
         'type': json['type'] == null ? undefined : json['type'],
         'brand': json['brand'] == null ? undefined : json['brand'],
         'price': json['price'] == null ? undefined : json['price'],
+        'initialStockQuantity': json['initialStockQuantity'] == null ? undefined : json['initialStockQuantity'],
+        'soldStockQuantity': json['soldStockQuantity'] == null ? undefined : json['soldStockQuantity'],
     };
 }
 
@@ -104,10 +111,11 @@ export function AdminItemResponseToJSONTyped(value?: AdminItemResponse | null, i
         'id': value['id'],
         'name': value['name'],
         'imageUrl': value['imageUrl'],
-        'stockQuantity': value['stockQuantity'],
         'type': value['type'],
         'brand': value['brand'],
         'price': value['price'],
+        'initialStockQuantity': value['initialStockQuantity'],
+        'soldStockQuantity': value['soldStockQuantity'],
     };
 }
 

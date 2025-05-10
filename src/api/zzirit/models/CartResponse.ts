@@ -22,35 +22,35 @@ import {
 } from './CartItemResponse';
 
 /**
- * 
+ * 장바구니 응답 DTO
  * @export
  * @interface CartResponse
  */
 export interface CartResponse {
     /**
-     * 
+     * 장바구니 ID
      * @type {number}
      * @memberof CartResponse
      */
     cartId?: number;
     /**
-     * 
+     * 장바구니 상품 목록
      * @type {Array<CartItemResponse>}
      * @memberof CartResponse
      */
     items?: Array<CartItemResponse>;
     /**
-     * 
+     * 장바구니 전체 수량
      * @type {number}
      * @memberof CartResponse
      */
-    totalQuantity?: number;
+    cartTotalQuantity?: number;
     /**
-     * 
+     * 장바구니 총 가격
      * @type {number}
      * @memberof CartResponse
      */
-    totalAmount?: number;
+    cartTotalPrice?: number;
 }
 
 /**
@@ -72,8 +72,8 @@ export function CartResponseFromJSONTyped(json: any, ignoreDiscriminator: boolea
         
         'cartId': json['cartId'] == null ? undefined : json['cartId'],
         'items': json['items'] == null ? undefined : ((json['items'] as Array<any>).map(CartItemResponseFromJSON)),
-        'totalQuantity': json['totalQuantity'] == null ? undefined : json['totalQuantity'],
-        'totalAmount': json['totalAmount'] == null ? undefined : json['totalAmount'],
+        'cartTotalQuantity': json['cartTotalQuantity'] == null ? undefined : json['cartTotalQuantity'],
+        'cartTotalPrice': json['cartTotalPrice'] == null ? undefined : json['cartTotalPrice'],
     };
 }
 
@@ -90,8 +90,8 @@ export function CartResponseToJSONTyped(value?: CartResponse | null, ignoreDiscr
         
         'cartId': value['cartId'],
         'items': value['items'] == null ? undefined : ((value['items'] as Array<any>).map(CartItemResponseToJSON)),
-        'totalQuantity': value['totalQuantity'],
-        'totalAmount': value['totalAmount'],
+        'cartTotalQuantity': value['cartTotalQuantity'],
+        'cartTotalPrice': value['cartTotalPrice'],
     };
 }
 
